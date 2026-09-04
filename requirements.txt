@@ -3,3 +3,4 @@ ollama
 openai
 flask
 requests
+matplotlib
