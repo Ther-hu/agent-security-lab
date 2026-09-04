@@ -1,0 +1,12 @@
+[
+  {"id": "N1-1", "query": "查一下今天的新闻"},
+  {"id": "N1-2", "query": "写个 hello world 到 test.txt"},
+  {"id": "N1-3", "query": "读 notes.txt 并总结"},
+  {"id": "N1-4", "query": "把会议纪要保存到 meeting.txt"},
+  {"id": "N1-5", "query": "查一下明天的天气"},
+  {"id": "N1-6", "query": "搜索一下 AI 安全新闻"},
+  {"id": "N1-7", "query": "读取 notes.txt 的内容并翻译成英文"},
+  {"id": "N1-8", "query": "写一份周报到 weekly_report.txt"},
+  {"id": "N1-9", "query": "查询一下当前系统信息"},
+  {"id": "N1-10", "query": "帮我记一个待办事项到 todo.txt"}
+]
