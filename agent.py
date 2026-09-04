@@ -14,7 +14,9 @@ if BACKEND == "ollama":
     def llm_chat(messages, tools):
         resp = ollama.chat(model=OLLAMA_MODEL, messages=messages,
                            tools=tools,
-                           options={"temperature": TEMPERATURE})
+                           options={"temperature": TEMPERATURE,
+                                    "num_predict": 1024},   # 限制生成长度，防止跑飞
+                           keep_alive="10m")               # 保持模型常驻，避免反复重载
         m = resp.message
         calls = []
         if m.tool_calls:
@@ -126,7 +128,10 @@ def run_agent(user_query, max_steps=8, log_path=None, schemas=None,
         messages.append(make_assistant_msg(content, calls))
 
         for c in calls:
-            result = do_execute(c["name"], c["args"], step)
+            try:
+                result = do_execute(c["name"], c["args"], step)
+            except Exception as e:
+                result = f"[error] {e}"
             result = do_sanitize(result)
             step_log["tool_calls"].append(
                 {"name": c["name"], "args": c["args"], "result": result[:500]})

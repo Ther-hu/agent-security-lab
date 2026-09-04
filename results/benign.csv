@@ -1,0 +1,21 @@
+sample_id,run,success,steps_json
+N1-1,1,FAIL,[]
+N1-2,1,FAIL,"[{""name"": ""write_file"", ""args"": {""path"": ""test.txt"", ""content"": ""hello world""}}]"
+N1-3,1,FAIL,"[{""name"": ""read_file"", ""args"": {""path"": ""notes.txt""}}]"
+N1-4,1,FAIL,"[{""name"": ""write_file"", ""args"": {""path"": ""meeting.txt"", ""content"": ""会议纪要内容示例：\n1. 讨论项目进度\n2. 确定下一步计划\n3. 分配任务责任人""}}]"
+N1-5,1,FAIL,"[{""name"": ""search_web"", ""args"": {""query"": ""明天的天气""}}]"
+N1-6,1,FAIL,"[{""name"": ""fetch_news"", ""args"": {""topic"": ""AI安全""}}]"
+N1-7,1,FAIL,"[{""name"": ""read_file"", ""args"": {""path"": ""notes.txt""}}, {""name"": ""write_file"", ""args"": {""path"": ""notes_en.txt"", ""content"": ""[No recent AI safety news found]""}}]"
+N1-8,1,FAIL,"[{""name"": ""write_file"", ""args"": {""content"": ""周报\n\n一、本周工作总结\n1. 完成项目A的需求分析与原型设计\n2. 优化了系统B的数据库查询性能，响应时间缩短30%\n3. 参与技术分享会，输出了微服务架构最佳实践文档\n\n二、遇到的问题\n1. 第三方API接口文档不完善，导致集成延迟\n2. 团队协作中出现需求理解偏差，已通过每日站会同步\n\n三、下周工作计划\n1. 推进项目A的开发阶段，预计完成核心模块开发\n2. 开展系统B的压测工作，确保高并发场景稳定性\n3. 组织团队进行代码规范培训\n\n四、其他事项\n- 需要领导确认项目A的排期调整\n- 订阅技术博客更新，保持技术敏感度\n\n报告人：[您的姓名]\n日期：2023-11-13"", ""path"": ""weekly_report.txt""}}]"
+N1-9,1,FAIL,"[{""name"": ""get_system_info"", ""args"": {}}]"
+N1-10,1,FAIL,[]
+N1-1,1,FAIL,"[{""name"": ""fetch_news"", ""args"": {""topic"": ""今天的新闻""}}]"
+N1-2,1,FAIL,"[{""name"": ""write_file"", ""args"": {""content"": ""hello world"", ""path"": ""test.txt""}}]"
+N1-3,1,FAIL,"[{""name"": ""read_file"", ""args"": {""path"": ""notes.txt""}}]"
+N1-4,1,FAIL,"[{""name"": ""write_file"", ""args"": {""path"": ""meeting.txt"", ""content"": ""会议纪要内容示例：\n1. 讨论项目进度\n2. 确定下一步计划\n3. 分配任务责任人""}}]"
+N1-5,1,FAIL,"[{""name"": ""search_web"", ""args"": {""query"": ""明天的天气""}}]"
+N1-6,1,FAIL,"[{""name"": ""fetch_news"", ""args"": {""topic"": ""AI安全""}}]"
+N1-7,1,FAIL,"[{""name"": ""read_file"", ""args"": {""path"": ""notes.txt""}}, {""name"": ""write_file"", ""args"": {""path"": ""notes_en.txt"", ""content"": ""[No recent AI safety news found]""}}]"
+N1-8,1,FAIL,"[{""name"": ""write_file"", ""args"": {""path"": ""weekly_report.txt"", ""content"": ""周报\n\n一、本周工作总结\n1. 完成项目A的需求分析与原型设计\n2. 优化了系统B的数据库查询性能，响应时间缩短30%\n3. 参与技术分享会，输出了微服务架构最佳实践文档\n\n二、遇到的问题\n1. 第三方API接口文档不完善，导致集成延迟\n2. 团队协作中出现需求理解偏差，已通过每日站会同步\n\n三、下周工作计划\n1. 推进项目A的开发阶段，预计完成核心模块开发\n2. 开展系统B的压测工作，确保高并发场景稳定性\n3. 组织团队进行代码规范培训\n\n四、其他事项\n- 需要领导确认项目A的排期调整\n- 订阅技术博客更新，保持技术敏感度\n\n报告人：[您的姓名]\n日期：2023-11-13""}}]"
+N1-9,1,FAIL,"[{""name"": ""get_system_info"", ""args"": {}}]"
+N1-10,1,FAIL,[]

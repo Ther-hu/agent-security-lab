@@ -124,15 +124,24 @@ def run_suite(suite, runs, out, defense, mcp_mode):
 
         for sample in samples:
             for run in range(1, runs + 1):
-                kwargs = stage(suite, sample, defenses, mcp_mode)
-                log = agent.run_agent(log_path=ROOT / "logs" / f"{sample['id']}_r{run}.json",
-                                      **kwargs)
-                ok = judge.is_success(log)
-                w.writerow([sample["id"], run,
-                            "SUCCESS" if ok else "FAIL",
-                            json.dumps(summarize(log), ensure_ascii=False)])
-                print(f"[{suite}] {sample['id']} run{run} -> "
-                      f"{'SUCCESS' if ok else 'FAIL'}")
+                try:
+                    kwargs = stage(suite, sample, defenses, mcp_mode)
+                    tag = ("_" + defense.replace(",", "+")) if defense else ""
+                    log = agent.run_agent(
+                        log_path=ROOT / "logs" / f"{sample['id']}_r{run}{tag}.json",
+                        **kwargs)
+                    ok = judge.is_success(log)
+                    w.writerow([sample["id"], run,
+                                "SUCCESS" if ok else "FAIL",
+                                json.dumps(summarize(log), ensure_ascii=False)])
+                    f.flush()  # 每轮实时落盘，中断也不丢
+                    print(f"[{suite}] {sample['id']} run{run} -> "
+                          f"{'SUCCESS' if ok else 'FAIL'}", flush=True)
+                except Exception as e:
+                    w.writerow([sample["id"], run, "ERROR", repr(e)])
+                    f.flush()
+                    print(f"[{suite}] {sample['id']} run{run} -> ERROR {e}",
+                          flush=True)
 
     total = runs * len(samples)
     succ = sum(1 for line in open(out_path, encoding="utf-8").read().strip().splitlines()[1:]
