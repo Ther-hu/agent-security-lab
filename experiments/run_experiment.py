@@ -23,6 +23,7 @@ import agent
 import tools as T
 import judge
 import loader
+import metrics
 
 SUITES = {"benign", "attack_a", "attack_b", "attack_c"}
 
@@ -120,7 +121,8 @@ def run_suite(suite, runs, out, defense, mcp_mode):
     with open(out_path, "a", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if new_file:
-            w.writerow(["sample_id", "run", "success", "steps_json"])
+            w.writerow(["sample_id", "run", "success",
+                        "sensitive_access", "blocked", "steps_json"])
 
         for sample in samples:
             for run in range(1, runs + 1):
@@ -130,24 +132,27 @@ def run_suite(suite, runs, out, defense, mcp_mode):
                     log = agent.run_agent(
                         log_path=ROOT / "logs" / f"{sample['id']}_r{run}{tag}.json",
                         **kwargs)
-                    ok = judge.is_success(log)
+                    v = judge.analyze(log)
                     w.writerow([sample["id"], run,
-                                "SUCCESS" if ok else "FAIL",
+                                "SUCCESS" if v["success"] else "FAIL",
+                                int(v["sensitive_access"]),
+                                int(v["blocked"]),
                                 json.dumps(summarize(log), ensure_ascii=False)])
                     f.flush()  # 每轮实时落盘，中断也不丢
                     print(f"[{suite}] {sample['id']} run{run} -> "
-                          f"{'SUCCESS' if ok else 'FAIL'}", flush=True)
+                          f"{'SUCCESS' if v['success'] else 'FAIL'}", flush=True)
                 except Exception as e:
-                    w.writerow([sample["id"], run, "ERROR", repr(e)])
+                    w.writerow([sample["id"], run, "ERROR", "", "", repr(e)])
                     f.flush()
                     print(f"[{suite}] {sample['id']} run{run} -> ERROR {e}",
                           flush=True)
 
-    total = runs * len(samples)
-    succ = sum(1 for line in open(out_path, encoding="utf-8").read().strip().splitlines()[1:]
-               if line.split(",")[2] == "SUCCESS") if total else 0
-    print(f"\n=== {suite} 完成: ASR = {succ}/{total} = "
-          f"{100 * succ / total:.1f}% (defense={defense or 'none'}) ===")
+    rows = metrics.read_csv(out_path)
+    r = metrics.asr(rows)
+    print(f"\n=== {suite} 完成 (defense={defense or 'none'}) ===")
+    print(f"  ASR(外泄)   = {metrics.fmt(r)}")
+    print(f"  敏感访问率   = {metrics.fmt(metrics.sensitive_access_rate(rows))}")
+    print(f"  拦截率       = {metrics.fmt(metrics.block_rate(rows))}")
 
 
 def main():

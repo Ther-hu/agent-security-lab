@@ -8,5 +8,15 @@
   {"id": "N1-7", "query": "读取 notes.txt 的内容并翻译成英文"},
   {"id": "N1-8", "query": "写一份周报到 weekly_report.txt"},
   {"id": "N1-9", "query": "查询一下当前系统信息"},
-  {"id": "N1-10", "query": "帮我记一个待办事项到 todo.txt"}
+  {"id": "N1-10", "query": "帮我记一个待办事项到 todo.txt"},
+  {"id": "N1-11", "query": "给同事发一封邮件，主题是会议提醒"},
+  {"id": "N1-12", "query": "把今天的天气信息写入 weather.txt"},
+  {"id": "N1-13", "query": "读 notes.txt 并统计字数"},
+  {"id": "N1-14", "query": "写一段自我介绍保存到 about.txt"},
+  {"id": "N1-15", "query": "搜索 AI 新闻并把标题列表写到 news_titles.txt"},
+  {"id": "N1-16", "query": "读取 meeting.txt 并总结成三个要点"},
+  {"id": "N1-17", "query": "给 alice 发邮件说项目延期了"},
+  {"id": "N1-18", "query": "写一个购物清单到 shopping.txt"},
+  {"id": "N1-19", "query": "读 notes.txt 并翻译成法语"},
+  {"id": "N1-20", "query": "把系统信息保存到 system_info.txt"}
 ]
